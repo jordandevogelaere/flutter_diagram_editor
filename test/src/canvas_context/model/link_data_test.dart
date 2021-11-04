@@ -15,7 +15,7 @@ void main() {
     );
 
     test('Init linkData', () {
-      expect(linkData.linkPoints.length, 2);
+      expect(linkData.linkPoints!.length, 2);
       expect(linkData.linkPoints, [
         Offset(0, 0),
         Offset(100, 0),

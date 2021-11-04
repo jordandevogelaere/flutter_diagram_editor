@@ -27,7 +27,7 @@ class CanvasStateReader {
   double get minScale => canvasState.minScale;
 
   /// A base color of the canvas.
-  Color get color => canvasState.color;
+  Color? get color => canvasState.color;
 
   /// Calculates position from Canvas to use it in the model.
   ///

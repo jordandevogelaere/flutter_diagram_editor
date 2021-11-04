@@ -55,8 +55,8 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(editor);
 
-      String id1 = policySet.canvasWriter.model.addComponent(componentData);
-      String id2 = policySet.canvasWriter.model.addComponent(componentData2);
+      String? id1 = policySet.canvasWriter.model.addComponent(componentData);
+      String? id2 = policySet.canvasWriter.model.addComponent(componentData2);
       policySet.canvasWriter.model.setComponentParent(id2, id1);
 
       await tester.pump();

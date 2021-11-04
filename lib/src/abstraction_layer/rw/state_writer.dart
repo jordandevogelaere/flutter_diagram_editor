@@ -45,7 +45,7 @@ class CanvasStateWriter {
   }
 
   /// Sets the base color of the canvas.
-  setCanvasColor(Color color) {
+  setCanvasColor(Color? color) {
     _canvasState.color = color;
   }
 

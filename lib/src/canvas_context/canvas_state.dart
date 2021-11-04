@@ -9,7 +9,7 @@ class CanvasState with ChangeNotifier {
   double maxScale = 8.0;
   double minScale = 0.1;
 
-  Color color = Colors.white;
+  Color? color = Colors.white;
 
   GlobalKey canvasGlobalKey = GlobalKey();
 

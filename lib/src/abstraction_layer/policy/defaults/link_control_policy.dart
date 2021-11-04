@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 /// Feel free to override other functions from [LinkPolicy] and add them to [PolicySet].
 mixin LinkControlPolicy implements LinkPolicy {
   @override
-  onLinkTapUp(String linkId, TapUpDetails details) {
+  onLinkTapUp(String? linkId, TapUpDetails details) {
     canvasWriter.model.hideAllLinkJoints();
     canvasWriter.model.showLinkJoints(linkId);
   }
@@ -17,7 +17,7 @@ mixin LinkControlPolicy implements LinkPolicy {
   var segmentIndex;
 
   @override
-  onLinkScaleStart(String linkId, ScaleStartDetails details) {
+  onLinkScaleStart(String? linkId, ScaleStartDetails details) {
     canvasWriter.model.hideAllLinkJoints();
     canvasWriter.model.showLinkJoints(linkId);
     segmentIndex = canvasReader.model
@@ -30,7 +30,7 @@ mixin LinkControlPolicy implements LinkPolicy {
   }
 
   @override
-  onLinkScaleUpdate(String linkId, ScaleUpdateDetails details) {
+  onLinkScaleUpdate(String? linkId, ScaleUpdateDetails details) {
     if (segmentIndex != null) {
       canvasWriter.model.setLinkMiddlePointPosition(
           linkId, details.localFocalPoint, segmentIndex);
@@ -39,7 +39,7 @@ mixin LinkControlPolicy implements LinkPolicy {
   }
 
   @override
-  onLinkLongPressStart(String linkId, LongPressStartDetails details) {
+  onLinkLongPressStart(String? linkId, LongPressStartDetails details) {
     canvasWriter.model.hideAllLinkJoints();
     canvasWriter.model.showLinkJoints(linkId);
     segmentIndex = canvasReader.model
@@ -52,7 +52,7 @@ mixin LinkControlPolicy implements LinkPolicy {
   }
 
   @override
-  onLinkLongPressMoveUpdate(String linkId, LongPressMoveUpdateDetails details) {
+  onLinkLongPressMoveUpdate(String? linkId, LongPressMoveUpdateDetails details) {
     if (segmentIndex != null) {
       canvasWriter.model.setLinkMiddlePointPosition(
           linkId, details.localPosition, segmentIndex);

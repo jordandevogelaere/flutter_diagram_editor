@@ -16,28 +16,28 @@ class CanvasModelReader {
   /// Returns a component with [id].
   ///
   /// If there is no component with [id] in the model, it returns null.
-  ComponentData getComponent(String id) {
+  ComponentData? getComponent(String? id) {
     return canvasModel.getComponent(id);
   }
 
   /// Returns all existing components in the model as a [HashMap].
   ///
   /// Key of the HashMap element is component's id.
-  HashMap<String, ComponentData> getAllComponents() {
+  HashMap<String?, ComponentData> getAllComponents() {
     return canvasModel.getAllComponents();
   }
 
   /// Returns a link with [id].
   ///
   /// If there is no link with [id] in the model, it returns null.
-  LinkData getLink(String id) {
+  LinkData? getLink(String id) {
     return canvasModel.getLink(id);
   }
 
   /// Returns all existing links in the model as a [HashMap].
   ///
   /// Key of the HashMap element is link's id.
-  HashMap<String, LinkData> getAllLinks() {
+  HashMap<String?, LinkData> getAllLinks() {
     return canvasModel.getAllLinks();
   }
 
@@ -46,11 +46,11 @@ class CanvasModelReader {
   /// Segments are indexed from 1.
   /// If there is no link segment on the tap location it returns null.
   /// It should take a localPosition from a onLinkTap or similar.
-  int determineLinkSegmentIndex(
-    String linkId,
+  int? determineLinkSegmentIndex(
+    String? linkId,
     Offset tapPosition,
   ) {
-    return canvasModel.links[linkId].determineLinkSegmentIndex(
+    return canvasModel.links[linkId]!.determineLinkSegmentIndex(
         tapPosition, canvasState.position, canvasState.scale);
   }
 }

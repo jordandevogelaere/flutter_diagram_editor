@@ -5,34 +5,34 @@ import 'package:flutter/material.dart';
 class LinkPainter extends CustomPainter {
   final List<Offset> linkPoints;
   final double scale;
-  final LinkStyle linkStyle;
+  final LinkStyle? linkStyle;
 
   LinkPainter({
-    @required this.linkPoints,
-    @required this.scale,
+    required this.linkPoints,
+    required this.scale,
     this.linkStyle,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = linkStyle.color
-      ..strokeWidth = linkStyle.lineWidth * scale
+      ..color = linkStyle!.color
+      ..strokeWidth = linkStyle!.lineWidth * scale
       ..style = PaintingStyle.stroke;
 
     for (int i = 0; i < linkPoints.length - 1; i++) {
       if (linkPoints.length == 2) {
         canvas.drawPath(
-          linkStyle.getLinePath(
+          linkStyle!.getLinePath(
             VectorUtils.getShorterLineStart(
               linkPoints[i],
               linkPoints[i + 1],
-              scale * linkStyle.getEndShortening(linkStyle.backArrowType),
+              scale * linkStyle!.getEndShortening(linkStyle!.backArrowType),
             ),
             VectorUtils.getShorterLineEnd(
               linkPoints[i],
               linkPoints[i + 1],
-              scale * linkStyle.getEndShortening(linkStyle.arrowType),
+              scale * linkStyle!.getEndShortening(linkStyle!.arrowType),
             ),
             scale,
           ),
@@ -40,11 +40,11 @@ class LinkPainter extends CustomPainter {
         );
       } else if (i == 0) {
         canvas.drawPath(
-          linkStyle.getLinePath(
+          linkStyle!.getLinePath(
             VectorUtils.getShorterLineStart(
               linkPoints[i],
               linkPoints[i + 1],
-              scale * linkStyle.getEndShortening(linkStyle.backArrowType),
+              scale * linkStyle!.getEndShortening(linkStyle!.backArrowType),
             ),
             linkPoints[i + 1],
             scale,
@@ -53,12 +53,12 @@ class LinkPainter extends CustomPainter {
         );
       } else if (i == linkPoints.length - 2) {
         canvas.drawPath(
-          linkStyle.getLinePath(
+          linkStyle!.getLinePath(
             linkPoints[i],
             VectorUtils.getShorterLineEnd(
               linkPoints[i],
               linkPoints[i + 1],
-              scale * linkStyle.getEndShortening(linkStyle.arrowType),
+              scale * linkStyle!.getEndShortening(linkStyle!.arrowType),
             ),
             scale,
           ),
@@ -66,16 +66,16 @@ class LinkPainter extends CustomPainter {
         );
       } else {
         canvas.drawPath(
-            linkStyle.getLinePath(linkPoints[i], linkPoints[i + 1], scale),
+            linkStyle!.getLinePath(linkPoints[i], linkPoints[i + 1], scale),
             paint);
       }
     }
 
     paint..style = PaintingStyle.fill;
     canvas.drawPath(
-        linkStyle.getArrowTipPath(
-          linkStyle.arrowType,
-          linkStyle.arrowSize,
+        linkStyle!.getArrowTipPath(
+          linkStyle!.arrowType,
+          linkStyle!.arrowSize,
           linkPoints[linkPoints.length - 2],
           linkPoints[linkPoints.length - 1],
           scale,
@@ -83,9 +83,9 @@ class LinkPainter extends CustomPainter {
         paint);
 
     canvas.drawPath(
-        linkStyle.getArrowTipPath(
-          linkStyle.backArrowType,
-          linkStyle.backArrowSize,
+        linkStyle!.getArrowTipPath(
+          linkStyle!.backArrowType,
+          linkStyle!.backArrowSize,
           linkPoints[1],
           linkPoints[0],
           scale,
@@ -106,7 +106,7 @@ class LinkPainter extends CustomPainter {
 
   @override
   bool hitTest(Offset position) {
-    Path path = makeWiderLinePath(scale * (5 + linkStyle.lineWidth));
+    Path path = makeWiderLinePath(scale * (5 + linkStyle!.lineWidth));
     return path.contains(position);
   }
 

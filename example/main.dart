@@ -48,7 +48,7 @@ class _DiagramAppState extends State<DiagramApp> {
 
 // Custom component Data which you can assign to a component to data property.
 class MyComponentData {
-  bool isHighlightVisible;
+  late bool isHighlightVisible;
   Color color =
       Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
 
@@ -127,10 +127,10 @@ mixin MyCanvasPolicy implements CanvasPolicy, CustomPolicy {
 // Mixin where component behaviour is defined. In this example it is the movement, highlight and connecting two components.
 mixin MyComponentPolicy implements ComponentPolicy, CustomPolicy {
   // variable used to calculate delta offset to move the component.
-  Offset lastFocalPoint;
+  late Offset lastFocalPoint;
 
   @override
-  onComponentTap(String componentId) {
+  onComponentTap(String? componentId) {
     canvasWriter.model.hideAllLinkJoints();
 
     bool connected = connectComponents(selectedComponentId, componentId);
@@ -141,7 +141,7 @@ mixin MyComponentPolicy implements ComponentPolicy, CustomPolicy {
   }
 
   @override
-  onComponentLongPress(String componentId) {
+  onComponentLongPress(String? componentId) {
     hideComponentHighlight(selectedComponentId);
     canvasWriter.model.hideAllLinkJoints();
     canvasWriter.model.removeComponent(componentId);
@@ -160,7 +160,7 @@ mixin MyComponentPolicy implements ComponentPolicy, CustomPolicy {
   }
 
   // This function tests if it's possible to connect the components and if yes, connects them
-  bool connectComponents(String sourceComponentId, String targetComponentId) {
+  bool connectComponents(String? sourceComponentId, String? targetComponentId) {
     if (sourceComponentId == null || targetComponentId == null) {
       return false;
     }
@@ -169,7 +169,7 @@ mixin MyComponentPolicy implements ComponentPolicy, CustomPolicy {
       return false;
     }
     // tests if the connection between two components already exists (one way)
-    if (canvasReader.model.getComponent(sourceComponentId).connections.any(
+    if (canvasReader.model.getComponent(sourceComponentId)!.connections.any(
         (connection) =>
             (connection is ConnectionOut) &&
             (connection.otherComponentId == targetComponentId))) {
@@ -193,18 +193,18 @@ mixin MyComponentPolicy implements ComponentPolicy, CustomPolicy {
 
 // You can create your own Policy to define own variables and functions with canvasReader and canvasWriter.
 mixin CustomPolicy implements PolicySet {
-  String selectedComponentId;
+  String? selectedComponentId;
 
-  highlightComponent(String componentId) {
-    canvasReader.model.getComponent(componentId).data.showHighlight();
-    canvasReader.model.getComponent(componentId).updateComponent();
+  highlightComponent(String? componentId) {
+    canvasReader.model.getComponent(componentId)!.data.showHighlight();
+    canvasReader.model.getComponent(componentId)!.updateComponent();
     selectedComponentId = componentId;
   }
 
-  hideComponentHighlight(String componentId) {
+  hideComponentHighlight(String? componentId) {
     if (componentId != null) {
-      canvasReader.model.getComponent(componentId).data.hideHighlight();
-      canvasReader.model.getComponent(componentId).updateComponent();
+      canvasReader.model.getComponent(componentId)!.data.hideHighlight();
+      canvasReader.model.getComponent(componentId)!.updateComponent();
       selectedComponentId = null;
     }
   }

@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 
 class ComponentData with ChangeNotifier {
   /// Unique id of this component.
-  String id;
+  String? id;
 
   /// Position on the canvas.
   Offset position;
@@ -20,7 +20,7 @@ class ComponentData with ChangeNotifier {
   /// Component type to distinguish components.
   ///
   /// You can use it for example to distinguish what [data] type this component has.
-  final String type;
+  final String? type;
 
   /// This value determines if this component will be above or under other components.
   /// Higher value means on the top.
@@ -30,13 +30,13 @@ class ComponentData with ChangeNotifier {
   ///
   /// Use for hierarchical components.
   /// Functions such as [moveComponentWithChildren] work with this property.
-  String parentId;
+  String? parentId;
 
   /// List of children of this component.
   ///
   /// Use for hierarchical components.
   /// Functions such as [moveComponentWithChildren] work with this property.
-  final List<String> childrenIds = [];
+  final List<String?> childrenIds = [];
 
   /// Defines to which components is this components connected and what is the [connectionId].
   ///
@@ -96,7 +96,7 @@ class ComponentData with ChangeNotifier {
   /// Removes existing connection.
   ///
   /// Do not use it if you are not sure what you do. This is called eg. in [removeLink] function.
-  removeConnection(String connectionId) {
+  removeConnection(String? connectionId) {
     connections.removeWhere((conn) => conn.connectionId == connectionId);
   }
 
@@ -140,7 +140,7 @@ class ComponentData with ChangeNotifier {
   /// It's not possible to make a parent-child loop. (its ancestor cannot be its child)
   ///
   /// You should use it only with [addChild] on the parent's component.
-  setParent(String parentId) {
+  setParent(String? parentId) {
     this.parentId = parentId;
   }
 
@@ -156,14 +156,14 @@ class ComponentData with ChangeNotifier {
   /// It's not possible to make a parent-child loop. (its ancestor cannot be its child)
   ///
   /// You should use it only with [setParent] on the child's component.
-  addChild(String childId) {
+  addChild(String? childId) {
     childrenIds.add(childId);
   }
 
   /// Removes child's id from children.
   ///
   /// You should use it only with [removeParent] on the child's component.
-  removeChild(String childId) {
+  removeChild(String? childId) {
     childrenIds.remove(childId);
   }
 

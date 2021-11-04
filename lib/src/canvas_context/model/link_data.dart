@@ -5,21 +5,21 @@ import 'package:flutter/material.dart';
 /// Class that carries all link data.
 class LinkData with ChangeNotifier {
   /// Unique link id.
-  final String id;
+  final String? id;
 
   /// Id of source component.
-  final String sourceComponentId;
+  final String? sourceComponentId;
 
   /// Id of target component.
-  final String targetComponentId;
+  final String? targetComponentId;
 
   /// Defines link design such as color, width and arrowheads.
-  LinkStyle linkStyle;
+  LinkStyle? linkStyle;
 
   /// Points from which the link is drawn on canvas.
   ///
   /// First and last points lay on the two components which are connected by this link.
-  final List<Offset> linkPoints;
+  final List<Offset>? linkPoints;
 
   /// Defines the visibility of link's joints.
   bool areJointsVisible = false;
@@ -49,13 +49,13 @@ class LinkData with ChangeNotifier {
 
   /// Sets the position of the first point of the link which lies on the source component.
   setStart(Offset start) {
-    linkPoints[0] = start;
+    linkPoints![0] = start;
     notifyListeners();
   }
 
   /// Sets the position of the last point of the link which lies on the target component.
   setEnd(Offset end) {
-    linkPoints[linkPoints.length - 1] = end;
+    linkPoints![linkPoints!.length - 1] = end;
     notifyListeners();
   }
 
@@ -63,13 +63,13 @@ class LinkData with ChangeNotifier {
   ///
   /// The points lie on the source and target components.
   setEndpoints(Offset start, Offset end) {
-    linkPoints[0] = start;
-    linkPoints[linkPoints.length - 1] = end;
+    linkPoints![0] = start;
+    linkPoints![linkPoints!.length - 1] = end;
     notifyListeners();
   }
 
   /// Returns list of all point of the link.
-  List<Offset> getLinkPoints() {
+  List<Offset>? getLinkPoints() {
     return linkPoints;
   }
 
@@ -80,8 +80,8 @@ class LinkData with ChangeNotifier {
   /// When the link is a straight line you want to add a point to index 1.
   insertMiddlePoint(Offset position, int index) {
     assert(index > 0);
-    assert(index < linkPoints.length);
-    linkPoints.insert(index, position);
+    assert(index < linkPoints!.length);
+    linkPoints!.insert(index, position);
     notifyListeners();
   }
 
@@ -89,7 +89,7 @@ class LinkData with ChangeNotifier {
   ///
   /// Middle points are indexed from 1.
   setMiddlePointPosition(Offset position, int index) {
-    linkPoints[index] = position;
+    linkPoints![index] = position;
     notifyListeners();
   }
 
@@ -97,7 +97,7 @@ class LinkData with ChangeNotifier {
   ///
   /// Middle points are indexed from 1.
   moveMiddlePoint(Offset offset, int index) {
-    linkPoints[index] += offset;
+    linkPoints![index] += offset;
     notifyListeners();
   }
 
@@ -105,17 +105,17 @@ class LinkData with ChangeNotifier {
   ///
   /// Middle points are indexed from 1.
   removeMiddlePoint(int index) {
-    assert(linkPoints.length > 2);
+    assert(linkPoints!.length > 2);
     assert(index > 0);
-    assert(index < linkPoints.length - 1);
-    linkPoints.removeAt(index);
+    assert(index < linkPoints!.length - 1);
+    linkPoints!.removeAt(index);
     notifyListeners();
   }
 
   /// Updates all link's middle points position by [offset].
   moveAllMiddlePoints(Offset position) {
-    for (int i = 1; i < linkPoints.length - 1; i++) {
-      linkPoints[i] += position;
+    for (int i = 1; i < linkPoints!.length - 1; i++) {
+      linkPoints![i] += position;
     }
   }
 
@@ -124,17 +124,17 @@ class LinkData with ChangeNotifier {
   /// Segments are indexed from 1.
   /// If there is no link segment on the tap location it returns null.
   /// It should take a [localPosition] from a [onLinkTap] function or similar.
-  int determineLinkSegmentIndex(
+  int? determineLinkSegmentIndex(
     Offset position,
     Offset canvasPosition,
     double canvasScale,
   ) {
-    for (int i = 0; i < linkPoints.length - 1; i++) {
-      var point1 = linkPoints[i] * canvasScale + canvasPosition;
-      var point2 = linkPoints[i + 1] * canvasScale + canvasPosition;
+    for (int i = 0; i < linkPoints!.length - 1; i++) {
+      var point1 = linkPoints![i] * canvasScale + canvasPosition;
+      var point2 = linkPoints![i + 1] * canvasScale + canvasPosition;
 
       Path rect = VectorUtils.getRectAroundLine(
-          point1, point2, canvasScale * (linkStyle.lineWidth + 5));
+          point1, point2, canvasScale * (linkStyle!.lineWidth + 5));
 
       if (rect.contains(position)) {
         return i + 1;

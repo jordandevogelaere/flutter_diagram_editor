@@ -4,31 +4,31 @@ import 'package:flutter/material.dart';
 
 /// Allows you to define the component behaviour on any gesture registered by the [Component].
 mixin ComponentPolicy on BasePolicySet {
-  onComponentTap(String componentId) {}
+  onComponentTap(String? componentId) {}
 
-  onComponentTapDown(String componentId, TapDownDetails details) {}
+  onComponentTapDown(String? componentId, TapDownDetails details) {}
 
-  onComponentTapUp(String componentId, TapUpDetails details) {}
+  onComponentTapUp(String? componentId, TapUpDetails details) {}
 
-  onComponentTapCancel(String componentId) {}
+  onComponentTapCancel(String? componentId) {}
 
-  onComponentScaleStart(String componentId, ScaleStartDetails details) {}
+  onComponentScaleStart(String? componentId, ScaleStartDetails details) {}
 
-  onComponentScaleUpdate(String componentId, ScaleUpdateDetails details) {}
+  onComponentScaleUpdate(String? componentId, ScaleUpdateDetails details) {}
 
-  onComponentScaleEnd(String componentId, ScaleEndDetails details) {}
+  onComponentScaleEnd(String? componentId, ScaleEndDetails details) {}
 
-  onComponentLongPress(String componentId) {}
+  onComponentLongPress(String? componentId) {}
 
   onComponentLongPressStart(
-      String componentId, LongPressStartDetails details) {}
+      String? componentId, LongPressStartDetails details) {}
 
   onComponentLongPressMoveUpdate(
-      String componentId, LongPressMoveUpdateDetails details) {}
+      String? componentId, LongPressMoveUpdateDetails details) {}
 
-  onComponentLongPressEnd(String componentId, LongPressEndDetails details) {}
+  onComponentLongPressEnd(String? componentId, LongPressEndDetails details) {}
 
-  onComponentLongPressUp(String componentId) {}
+  onComponentLongPressUp(String? componentId) {}
 
-  onComponentPointerSignal(String componentId, PointerSignalEvent event) {}
+  onComponentPointerSignal(String? componentId, PointerSignalEvent event) {}
 }
