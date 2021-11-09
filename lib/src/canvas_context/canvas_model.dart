@@ -125,11 +125,11 @@ class CanvasModel with ChangeNotifier {
 
   /// Creates a link between components. Returns created link's id.
   String connectTwoComponents(
-    String sourceComponentId,
-    String targetComponentId,
-    LinkStyle? linkStyle,
-    dynamic data,
-  ) {
+      String sourceComponentId,
+      String targetComponentId,
+      LinkStyle? linkStyle,
+      dynamic data,
+      List<Offset>? linkPoints) {
     var linkId = _uuid.v4();
     var sourceComponent = getComponent(sourceComponentId);
     var targetComponent = getComponent(targetComponentId);
@@ -160,12 +160,14 @@ class CanvasModel with ChangeNotifier {
       id: linkId,
       sourceComponentId: sourceComponentId,
       targetComponentId: targetComponentId,
-      linkPoints: [
-        sourceComponent.position +
-            sourceComponent.getPointOnComponent(sourceLinkAlignment),
-        targetComponent.position +
-            targetComponent.getPointOnComponent(targetLinkAlignment),
-      ],
+      linkPoints: linkPoints == null
+          ? [
+              sourceComponent.position +
+                  sourceComponent.getPointOnComponent(sourceLinkAlignment),
+              targetComponent.position +
+                  targetComponent.getPointOnComponent(targetLinkAlignment),
+            ]
+          : linkPoints,
       linkStyle: linkStyle == null ? LinkStyle() : linkStyle,
       data: data,
     );

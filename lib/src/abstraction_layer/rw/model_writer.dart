@@ -335,14 +335,11 @@ mixin ConnectionWriter on ModelWriter {
     required String targetComponentId,
     LinkStyle? linkStyle,
     dynamic data,
+    List<Offset>? linkPoints,
   }) {
     assert(_canvasModel.componentExists(sourceComponentId));
     assert(_canvasModel.componentExists(targetComponentId));
     return _canvasModel.connectTwoComponents(
-      sourceComponentId,
-      targetComponentId,
-      linkStyle,
-      data,
-    );
+        sourceComponentId, targetComponentId, linkStyle, data, linkPoints);
   }
 }
