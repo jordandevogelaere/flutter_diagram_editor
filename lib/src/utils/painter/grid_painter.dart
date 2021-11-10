@@ -60,13 +60,14 @@ class GridPainter extends CustomPainter {
       var dotPainter = Paint()
         ..color = lineColor
         ..strokeCap = StrokeCap.round //rounded points
-        ..strokeWidth = 5;
+        ..strokeWidth = lineWidth;
       var count = (lineVerticalLength / horizontalGap).round();
       var points = <Offset>[];
       for (int i = -count + 1; i < count; i++) {
-        points.add((Offset(-lineHorizontalLength, i * horizontalGap) +
-                offset % horizontalGap) *
-            scale);
+        var y = i * horizontalGap;
+        for (int i = -count + 1; i < count; i++) {
+          points.add(Offset(i * horizontalGap, y));
+        }
       }
       canvas.drawPoints(PointMode.points, points, dotPainter);
     }
